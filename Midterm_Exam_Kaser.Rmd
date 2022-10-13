@@ -1,0 +1,66 @@
+---
+title: "ADA Midterm Exam"
+author: "Taylor Kaser"
+date: "2022-10-13"
+output: html_document
+---
+
+# ADA Midterm Exam
+
+```{r}
+# Load libraries
+library(tidyverse)
+library(readr)
+library(table1)
+```
+
+
+## Question 3: Using the titanic dataset located at "https://github.com/kijohnson/Data",  prepare an R markdown file that shows the code for 
+### a) importing the dataset
+
+```{r}
+# Load Titanic data
+
+titanic_data <- read_csv("https://raw.githubusercontent.com/kijohnson/Data/main/titanic.csv")
+
+# Examine data
+summary(titanic_data)
+
+# Change Survived, PClass, and Sex to factors
+titanic_data_clean <- titanic_data %>%
+  mutate(Survived = as.factor(Survived)) %>%
+  mutate(Sex = as.factor(Sex)) %>%
+  mutate(Pclass = as.factor(Pclass))
+  
+```
+
+##b) determining the median age for by passenger class
+
+```{r}
+# Determine median age by Pclass using table1
+
+table1(~ Age | Pclass, data = titanic_data_clean)
+
+```
+
+##c) a plot that shows medians, spread of data, and outliers for the continuous variable age according to passenger class. Report the medians by passenger class and upload a PDF or picture of your plot.
+
+```{r}
+# Create boxplot
+
+titanic_data_clean %>%
+  ggplot(aes(x = Pclass, y = Age)) + # Maps Pclass (x) and Age (y) onto the plot
+  geom_boxplot() + # specifies the type of plot is a boxplot
+  labs(x = "Passenger Class", y = "Age",  title = "Age by Passenger Class") + # Creates axis and labels and graph title
+  theme_minimal() # Removes grey background
+
+ggsave(filename = "Age_Pclass_bplot.png",
+       width = 4, height = 4, units = "in", bg="white") # Saves boxplot as .png - stored in working directory
+
+```
+
+
+
+
+
+
