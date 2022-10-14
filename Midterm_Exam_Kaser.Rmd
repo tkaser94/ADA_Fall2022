@@ -59,7 +59,20 @@ ggsave(filename = "Age_Pclass_bplot.png",
 
 ```
 
+## Question 4
 
+### a. Put the version of the code file that you wrote for question 3 that includes annotation for what each step does in a Github repository (you can use the one previously created in class or for your homework or create a new one).
+
+### b. Next, add code to determine the percentage of males and females by class. Save this new version and push the new version to your Github repository.
+
+```{r}
+# Determine percentage of males/females by class using table1
+
+table1(~ Sex | Pclass, data = titanic_data_clean)
+```
+
+
+### c. Provide a link to your Github repository containing the code file for review.
 
 
 
